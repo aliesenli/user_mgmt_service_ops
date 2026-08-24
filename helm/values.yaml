@@ -17,7 +17,7 @@ frontend:
     tag: latest
   replicas: 1
   port: 3000
-  apiUrl: "http://67.207.73.3/api"
+  apiUrl: "https://app.aliesenli.com/api"
   readinessProbe:
     initialDelaySeconds: 10
     periodSeconds: 10
@@ -44,3 +44,4 @@ secret:
 
 ingress:
   className: nginx
+  host: app.aliesenli.com
