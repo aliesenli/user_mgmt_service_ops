@@ -22,7 +22,7 @@ frontend:
 postgres:
   image:
     repository: postgres
-    tag: a44b10c1e0ea1c416046bbe54de2dd742b76bf60
+    tag: 16-alpine
   replicas: 1
   port: 5432
   storage: 1Gi
