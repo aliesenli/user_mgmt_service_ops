@@ -9,6 +9,13 @@ backend:
     initialDelaySeconds: 90
     periodSeconds: 10
     failureThreshold: 6
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
 frontend:
   image:
     repository: ghcr.io/aliesenli/user-mgmt-frontend
@@ -19,6 +26,13 @@ frontend:
   readinessProbe:
     initialDelaySeconds: 10
     periodSeconds: 10
+  resources:
+    requests:
+      cpu: "50m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
 postgres:
   image:
     repository: postgres
@@ -26,6 +40,13 @@ postgres:
   replicas: 1
   port: 5432
   storage: 1Gi
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
 config:
   springDatasourceUrl: "jdbc:postgresql://postgres:5432/userdb"
   springJpaHibernateDdlAuto: "update"
