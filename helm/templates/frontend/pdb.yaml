@@ -1,0 +1,13 @@
+{{- $component := "frontend" }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $component }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "user-mgmt.labels" . | nindent 4 }}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: {{ $component }}
