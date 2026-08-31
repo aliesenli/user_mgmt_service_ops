@@ -1,0 +1,7 @@
+namespace: user-mgmt-staging
+
+frontend:
+  apiUrl: "https://staging.aliesenli.com/api"
+
+ingress:
+  host: staging.aliesenli.com

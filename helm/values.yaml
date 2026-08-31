@@ -39,3 +39,7 @@ secret:
 ingress:
   className: nginx
   host: app.aliesenli.com
+
+resourceQuota:
+  cpu: "1"
+  memory: "1Gi"
