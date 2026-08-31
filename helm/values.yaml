@@ -16,6 +16,10 @@ backend:
     limits:
       cpu: "500m"
       memory: "512Mi"
+  hpa:
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 70
 frontend:
   image:
     repository: ghcr.io/aliesenli/user-mgmt-frontend
