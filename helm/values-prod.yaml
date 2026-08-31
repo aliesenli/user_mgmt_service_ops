@@ -1,0 +1,7 @@
+namespace: user-mgmt-prod
+
+frontend:
+  apiUrl: "https://app.aliesenli.com/api"
+
+ingress:
+  host: app.aliesenli.com
