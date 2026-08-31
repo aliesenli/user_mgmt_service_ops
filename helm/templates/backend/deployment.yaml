@@ -26,6 +26,13 @@ spec:
               until nc -z postgres {{ .Values.postgres.port }}; do
                 echo "waiting for postgres..."; sleep 2;
               done
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "50m"
+              memory: "32Mi"
       containers:
         - name: {{ $component }}
           image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
@@ -67,6 +74,13 @@ spec:
                 secretKeyRef:
                   name: app-secret
                   key: JWT_SECRET
+          resources:
+            requests:
+              cpu: {{ .Values.backend.resources.requests.cpu | quote }}
+              memory: {{ .Values.backend.resources.requests.memory | quote }}
+            limits:
+              cpu: {{ .Values.backend.resources.limits.cpu | quote }}
+              memory: {{ .Values.backend.resources.limits.memory | quote }}
           readinessProbe:
             tcpSocket:
               port: {{ .Values.backend.port }}
