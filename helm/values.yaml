@@ -66,5 +66,5 @@ ingress:
   host: app.aliesenli.com
 
 resourceQuota:
-  cpu: "1"
-  memory: "1Gi"
+  cpu: "2"
+  memory: "2Gi"
