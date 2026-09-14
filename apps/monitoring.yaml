@@ -10,7 +10,6 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 65.1.1
     helm:
-      valuesFiles: []
       values: |
         grafana:
           adminPassword: "admin"
