@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: user-mgmt-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: user-mgmt.rules
+      rules:
+        - alert: HighErrorRate
+          expr: |
+            sum(rate(http_server_requests_seconds_count{application="user-mgmt-service", status=~"5.."}[5m]))
+            /
+            sum(rate(http_server_requests_seconds_count{application="user-mgmt-service"}[5m])) > 0.05
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "High error rate on user-mgmt-service"
+            description: "More than 5% of requests are returning 5xx errors for the last 2 minutes."

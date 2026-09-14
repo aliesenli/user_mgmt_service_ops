@@ -1,0 +1,58 @@
+grafana:
+  adminPassword: "admin"
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - grafana.aliesenli.com
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.aliesenli.com
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: default
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+  dashboards:
+    default:
+      kubernetes-pods:
+        gnetId: 15760
+        revision: 1
+        datasource: Prometheus
+      spring-boot:
+        gnetId: 19004
+        revision: 2
+        datasource: Prometheus
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+
+alertmanager:
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      group_by: ["alertname"]
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: "discord"
+    receivers:
+      - name: "discord"
+        discord_configs:
+          - webhook_url: "DISCORD_WEBHOOK_URL"
+            title: "{{ .GroupLabels.alertname }}"
+            message: "{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}"
