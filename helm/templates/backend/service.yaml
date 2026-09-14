@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     {{- include "user-mgmt.labels" . | nindent 4 }}
+    app: {{ $component }}
 spec:
   selector:
     app: {{ $component }}

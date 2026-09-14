@@ -46,8 +46,8 @@ spec:
                 revision: 1
                 datasource: Prometheus
               spring-boot:
-                gnetId: 19004
-                revision: 1
+                gnetId: 12900
+                revision: 3
                 datasource: Prometheus
         prometheus:
           prometheusSpec:
