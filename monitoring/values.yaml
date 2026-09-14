@@ -11,6 +11,9 @@ grafana:
       - secretName: grafana-tls
         hosts:
           - grafana.aliesenli.com
+  sidecar:
+    dashboards:
+      allowUiUpdates: true
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
@@ -31,7 +34,7 @@ grafana:
         datasource: Prometheus
       spring-boot:
         gnetId: 19004
-        revision: 2
+        revision: 1
         datasource: Prometheus
 
 prometheus:
