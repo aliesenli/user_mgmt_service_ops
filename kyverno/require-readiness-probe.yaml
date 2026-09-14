@@ -1,0 +1,29 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-readiness-probe
+  annotations:
+    policies.kyverno.io/title: Require Readiness Probe
+    policies.kyverno.io/description: >-
+      All containers must define a readinessProbe to ensure traffic is only
+      routed to healthy pods.
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: check-readiness-probe
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              namespaces:
+                - user-mgmt-prod
+                - user-mgmt-staging
+      validate:
+        message: "All containers must define a readinessProbe."
+        deny:
+          conditions:
+            any:
+              - key: "{{ request.object.spec.containers[].readinessProbe | length(@) }}"
+                operator: Equals
+                value: 0

@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-latest-tag
+  annotations:
+    policies.kyverno.io/title: Disallow Latest Tag
+    policies.kyverno.io/description: >-
+      Container images must use a specific tag. Using :latest is not allowed
+      as it makes deployments non-reproducible.
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: check-image-tag
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Container images must not use the ':latest' tag. Specify an explicit version."
+        pattern:
+          spec:
+            containers:
+              - image: "!*:latest"
