@@ -21,23 +21,6 @@ spec:
       labels:
         app: {{ $component }}
     spec:
-      initContainers:
-        - name: wait-for-postgres
-          image: busybox:1.36
-          command:
-            - sh
-            - -c
-            - |
-              until nc -z postgres {{ .Values.postgres.port }}; do
-                echo "waiting for postgres..."; sleep 2;
-              done
-          resources:
-            requests:
-              cpu: "50m"
-              memory: "32Mi"
-            limits:
-              cpu: "50m"
-              memory: "32Mi"
       containers:
         - name: {{ $component }}
           image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
@@ -46,8 +29,8 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               valueFrom:
-                configMapKeyRef:
-                  name: app-config
+                secretKeyRef:
+                  name: app-secret
                   key: SPRING_DATASOURCE_URL
             - name: SPRING_JPA_HIBERNATE_DDL_AUTO
               valueFrom:
