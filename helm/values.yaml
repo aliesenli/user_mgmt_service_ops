@@ -37,30 +37,10 @@ frontend:
     limits:
       cpu: "200m"
       memory: "256Mi"
-postgres:
-  image:
-    repository: postgres
-    tag: 16-alpine
-  replicas: 1
-  port: 5432
-  storage: 1Gi
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "128Mi"
-    limits:
-      cpu: "300m"
-      memory: "256Mi"
 config:
-  springDatasourceUrl: "jdbc:postgresql://postgres:5432/userdb"
   springJpaHibernateDdlAuto: "update"
   jwtIssuer: "user-mgmt-service"
   jwtExpirationMillis: "3600000"
-secret:
-  postgresUser: "appuser"
-  postgresPassword: "secret"
-  postgresDb: "userdb"
-  jwtSecret: "change-me-to-a-long-random-string"
 ingress:
   className: nginx
   host: app.aliesenli.com
