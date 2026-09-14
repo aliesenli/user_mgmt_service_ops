@@ -15,6 +15,17 @@ spec:
           - resources:
               kinds:
                 - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - kube-public
+                - argocd
+                - monitoring
+                - policy
+                - cert-manager
+                - ingress-nginx
       validate:
         message: "All containers must have CPU and memory limits defined."
         pattern:
