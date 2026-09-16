@@ -9,4 +9,4 @@ data:
   SPRING_JPA_HIBERNATE_DDL_AUTO: {{ .Values.config.springJpaHibernateDdlAuto | quote }}
   JWT_ISSUER: {{ .Values.config.jwtIssuer | quote }}
   JWT_EXPIRATION_MILLIS: {{ .Values.config.jwtExpirationMillis | quote }}
-  MODULE_SERVICE_URL: "http://module-service.{{ .Values.namespace }}.svc.cluster.local"
+  MODULE_SERVICE_URL: "http://module-service.{{ .Values.namespace }}.svc.cluster.local:{{ .Values.moduleService.port }}"
