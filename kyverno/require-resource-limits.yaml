@@ -26,6 +26,10 @@ spec:
                 - policy
                 - cert-manager
                 - ingress-nginx
+          - resources:
+              selector:
+                matchLabels:
+                  acme.cert-manager.io/http-solver: "true"
       validate:
         message: "All containers must have CPU and memory limits defined."
         pattern:

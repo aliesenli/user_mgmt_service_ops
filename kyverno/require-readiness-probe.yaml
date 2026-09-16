@@ -19,6 +19,14 @@ spec:
               namespaces:
                 - user-mgmt-prod
                 - user-mgmt-staging
+      exclude:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              selector:
+                matchLabels:
+                  acme.cert-manager.io/http-solver: "true"
       validate:
         message: "All containers must define a readinessProbe."
         deny:
