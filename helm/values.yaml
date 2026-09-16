@@ -44,9 +44,23 @@ config:
 ingress:
   className: nginx
   host: app.aliesenli.com
+moduleService:
+  image:
+    repository: ghcr.io/aliesenli/module-service
+    tag: edab20a92261a204df6fed168de052eb37fa7392
+  replicas: 1
+  port: 8000
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    failureThreshold: 3
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
 resourceQuota:
   cpu: "2"
   memory: "2Gi"
-moduleService:
-  image:
-    tag: edab20a92261a204df6fed168de052eb37fa7392

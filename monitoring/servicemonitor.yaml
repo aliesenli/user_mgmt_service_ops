@@ -17,3 +17,23 @@ spec:
     - port: http
       path: /actuator/prometheus
       interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: module-service
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  namespaceSelector:
+    matchNames:
+      - user-mgmt-prod
+      - user-mgmt-staging
+  selector:
+    matchLabels:
+      app: module-service
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
