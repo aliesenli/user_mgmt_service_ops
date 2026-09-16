@@ -47,3 +47,6 @@ ingress:
 resourceQuota:
   cpu: "2"
   memory: "2Gi"
+moduleService:
+  image:
+    tag: edab20a92261a204df6fed168de052eb37fa7392
