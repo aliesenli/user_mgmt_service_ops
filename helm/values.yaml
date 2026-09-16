@@ -6,7 +6,7 @@ backend:
   replicas: 1
   port: 8080
   readinessProbe:
-    initialDelaySeconds: 90
+    initialDelaySeconds: 150
     periodSeconds: 10
     failureThreshold: 6
   resources:
