@@ -44,6 +44,7 @@ config:
 ingress:
   className: nginx
   host: app.aliesenli.com
+  apiHost: api.aliesenli.com
 moduleService:
   image:
     repository: ghcr.io/aliesenli/module-service

@@ -34,19 +34,18 @@ metadata:
     {{- include "user-mgmt.labels" . | nindent 4 }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
     - hosts:
-        - {{ .Values.ingress.host }}
-      secretName: app-tls
+        - {{ .Values.ingress.apiHost }}
+      secretName: api-tls
   rules:
-    - host: {{ .Values.ingress.host }}
+    - host: {{ .Values.ingress.apiHost }}
       http:
         paths:
-          - path: /api(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: backend
