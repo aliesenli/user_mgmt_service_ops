@@ -47,7 +47,7 @@ ingress:
 moduleService:
   image:
     repository: ghcr.io/aliesenli/module-service
-    tag: edab20a92261a204df6fed168de052eb37fa7392
+    tag: a21323245018afe874a1e7a82dd9f4f31b3a0343
   replicas: 1
   port: 8000
   readinessProbe:
