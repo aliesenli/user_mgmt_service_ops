@@ -1,0 +1,57 @@
+{{- $component := "module-service" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $component }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "user-mgmt.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.moduleService.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $component }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: {{ $component }}
+    spec:
+      containers:
+        - name: {{ $component }}
+          image: {{ .Values.moduleService.image.repository }}:{{ .Values.moduleService.image.tag }}
+          ports:
+            - containerPort: {{ .Values.moduleService.port }}
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: module-secret
+                  key: DATABASE_URL
+            - name: MYSQL_SSL_DISABLED
+              value: "true"
+          resources:
+            requests:
+              cpu: {{ .Values.moduleService.resources.requests.cpu | quote }}
+              memory: {{ .Values.moduleService.resources.requests.memory | quote }}
+            limits:
+              cpu: {{ .Values.moduleService.resources.limits.cpu | quote }}
+              memory: {{ .Values.moduleService.resources.limits.memory | quote }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.moduleService.port }}
+            initialDelaySeconds: {{ .Values.moduleService.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.moduleService.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.moduleService.readinessProbe.failureThreshold }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.moduleService.port }}
+            initialDelaySeconds: {{ .Values.moduleService.readinessProbe.initialDelaySeconds }}
+            periodSeconds: 20
+            failureThreshold: 3

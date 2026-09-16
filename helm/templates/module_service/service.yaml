@@ -1,0 +1,16 @@
+{{- $component := "module-service" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $component }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "user-mgmt.labels" . | nindent 4 }}
+    app: {{ $component }}
+spec:
+  selector:
+    app: {{ $component }}
+  ports:
+    - name: http
+      port: {{ .Values.moduleService.port }}
+      targetPort: {{ .Values.moduleService.port }}

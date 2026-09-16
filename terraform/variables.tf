@@ -33,3 +33,21 @@ variable "db_user" {
   type        = string
   default     = "appuser"
 }
+
+variable "mysql_cluster_name" {
+  description = "Name of the DigitalOcean MySQL cluster"
+  type        = string
+  default     = "module-service-mysql"
+}
+
+variable "mysql_db_name" {
+  description = "MySQL database name for module_service"
+  type        = string
+  default     = "module_service"
+}
+
+variable "mysql_user" {
+  description = "MySQL user for module_service"
+  type        = string
+  default     = "module_service"
+}
