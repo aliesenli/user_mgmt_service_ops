@@ -62,5 +62,5 @@ moduleService:
       cpu: "300m"
       memory: "256Mi"
 resourceQuota:
-  cpu: "2"
-  memory: "2Gi"
+  cpu: "3"
+  memory: "3Gi"

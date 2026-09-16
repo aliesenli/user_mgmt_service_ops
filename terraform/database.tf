@@ -20,7 +20,7 @@ resource "digitalocean_database_user" "app" {
 resource "digitalocean_database_cluster" "mysql" {
   name       = var.mysql_cluster_name
   engine     = "mysql"
-  version    = "8"
+  version    = "8.4"
   size       = "db-s-1vcpu-1gb"
   region     = var.region
   node_count = 1

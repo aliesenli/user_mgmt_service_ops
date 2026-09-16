@@ -49,6 +49,9 @@ spec:
                 gnetId: 12900
                 revision: 3
                 datasource: Prometheus
+                tags:
+                  - kubernetes
+                  - spring-boot
         prometheus:
           prometheusSpec:
             serviceMonitorSelectorNilUsesHelmValues: false

@@ -13,6 +13,7 @@ data:
       "version": 1,
       "schemaVersion": 38,
       "refresh": "30s",
+      "tags": ["kubernetes", "python", "fastapi"],
       "panels": [
         {
           "id": 1,

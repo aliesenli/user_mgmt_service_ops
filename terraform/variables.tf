@@ -11,13 +11,13 @@ variable "region" {
 }
 
 variable "cluster_name" {
-  description = "Kubernetes cluster name"
+  description = "Kubernetes cluster TEKO-VSC"
   type        = string
-  default     = "vsc-k8s-1-36-3-do-4-fra1"
+  default     = "vsc-k8s-fra1"
 }
 
 variable "db_cluster_name" {
-  description = "Managed PostgreSQL cluster name"
+  description = "Managed PostgreSQL TEKO-VSC"
   type        = string
   default     = "user-mgmt-postgres"
 }
@@ -35,13 +35,13 @@ variable "db_user" {
 }
 
 variable "mysql_cluster_name" {
-  description = "Name of the DigitalOcean MySQL cluster"
+  description = "Managed MySQL TEKO-VSC"
   type        = string
   default     = "module-service-mysql"
 }
 
 variable "mysql_db_name" {
-  description = "MySQL database name for module_service"
+  description = "Managed MySQL TEKO-VSC"
   type        = string
   default     = "module_service"
 }
