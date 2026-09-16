@@ -2,7 +2,7 @@ namespace: user-mgmt
 backend:
   image:
     repository: ghcr.io/aliesenli/user-mgmt-backend
-    tag: c9314de3909cf99f303c6b0a5d98e81c655bccb3
+    tag: a898c4973f63390a8b1365c35ff6653b4d1fb5c8
   replicas: 1
   port: 8080
   readinessProbe:
@@ -23,7 +23,7 @@ backend:
 frontend:
   image:
     repository: ghcr.io/aliesenli/user-mgmt-frontend
-    tag: c9314de3909cf99f303c6b0a5d98e81c655bccb3
+    tag: a898c4973f63390a8b1365c35ff6653b4d1fb5c8
   replicas: 1
   port: 3000
   apiUrl: "https://app.aliesenli.com/api"
